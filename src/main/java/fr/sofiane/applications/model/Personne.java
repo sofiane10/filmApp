@@ -1,6 +1,7 @@
 package fr.sofiane.applications.model;
 
 import fr.sofiane.applications.enums.TypePersonneEnum;
+import org.hibernate.annotations.DiscriminatorFormula;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
