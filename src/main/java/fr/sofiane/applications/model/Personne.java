@@ -1,9 +1,13 @@
 package fr.sofiane.applications.model;
 
+import fr.sofiane.applications.enums.TypePersonneEnum;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Sofiane on 21/10/2016.
@@ -11,23 +15,21 @@ import java.util.Date;
 
 @Entity(name = "personne")
 @Table(name = "personne")
-public class Personne implements Serializable{
+public abstract class Personne extends CommonEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+    @NotNull
     private String nom;
+
+    @NotNull
     private String prenom;
+
+    @NotNull
+    @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type_personne")
+    private TypePersonneEnum typePersonne;
 
     public String getNom() {
         return nom;
@@ -51,5 +53,13 @@ public class Personne implements Serializable{
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public TypePersonneEnum getTypePersonne() {
+        return typePersonne;
+    }
+
+    public void setTypePersonne(TypePersonneEnum typePersonne) {
+        this.typePersonne = typePersonne;
     }
 }

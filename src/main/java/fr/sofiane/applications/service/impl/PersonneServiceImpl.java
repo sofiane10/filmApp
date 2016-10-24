@@ -53,6 +53,7 @@ public class PersonneServiceImpl implements PersonneService {
 
     @Override
     public List<PersonneDto> add(Map<String, Object> p) throws ParseException {
+        /*
         List<Personne> personnes = (List) personneRepository.findAll();
         DateFormat dateFormat = new SimpleDateFormat();
         Date date = dateFormat.parse((String) p.get("dateOfBirth"));
@@ -68,6 +69,8 @@ public class PersonneServiceImpl implements PersonneService {
             }
         });
         return personneDtos;
+        */
+        return null;
     }
 
     @Override
