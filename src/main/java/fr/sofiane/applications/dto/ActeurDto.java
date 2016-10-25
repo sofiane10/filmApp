@@ -1,17 +1,19 @@
 package fr.sofiane.applications.dto;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Sofiane on 21/10/2016.
  */
-public class PersonneDto {
+public class ActeurDto {
 
     private Long id;
     private String nom;
     private String prenom;
     private Integer age;
     private Date dateOfBirth;
+    private List<FilmDto> filmDtos;
 
 
     public Long getId() {
@@ -52,5 +54,13 @@ public class PersonneDto {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public List<FilmDto> getFilmDtos() {
+        return filmDtos;
+    }
+
+    public void setFilmDtos(List<FilmDto> filmDtos) {
+        this.filmDtos = filmDtos;
     }
 }

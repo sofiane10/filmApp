@@ -1,6 +1,6 @@
 package fr.sofiane.applications.service.impl;
 
-import fr.sofiane.applications.dto.PersonneDto;
+import fr.sofiane.applications.dto.ActeurDto;
 import fr.sofiane.applications.helper.PersonneHelper;
 import fr.sofiane.applications.model.Acteur;
 import fr.sofiane.applications.model.Personne;
@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -33,27 +31,27 @@ public class PersonneServiceImpl implements PersonneService {
     Transformers transformers;
 
     @Override
-    public List<PersonneDto> getPersonnes() {
-        List<PersonneDto> personneDtos = transformers.convertToListDto(personneRepository.findAll(), PersonneDto.class);
-        personneDtos.forEach(personneDto -> {
-            if (personneDto.getDateOfBirth() != null) {
-                personneDto.setAge(PersonneHelper.getInstance().calculateAgeFromDateOfBirth(personneDto.getDateOfBirth()));
+    public List<ActeurDto> getPersonnes() {
+        List<ActeurDto> acteurDtos = transformers.convertToListDto(personneRepository.findAll(), ActeurDto.class);
+        acteurDtos.forEach(acteurDto -> {
+            if (acteurDto.getDateOfBirth() != null) {
+                acteurDto.setAge(PersonneHelper.getInstance().calculateAgeFromDateOfBirth(acteurDto.getDateOfBirth()));
             }
         });
-        return personneDtos;
+        return acteurDtos;
     }
 
     @Override
-    public PersonneDto getOne(Long id) {
-        PersonneDto personneDto = (PersonneDto) transformers.convertToDto(personneRepository.findOne(id), PersonneDto.class);
-        if (personneDto.getDateOfBirth() != null) {
-            personneDto.setAge(PersonneHelper.getInstance().calculateAgeFromDateOfBirth(personneDto.getDateOfBirth()));
+    public ActeurDto getOne(Long id) {
+        ActeurDto acteurDto = (ActeurDto) transformers.convertToDto(personneRepository.findOne(id), ActeurDto.class);
+        if (acteurDto.getDateOfBirth() != null) {
+            acteurDto.setAge(PersonneHelper.getInstance().calculateAgeFromDateOfBirth(acteurDto.getDateOfBirth()));
         }
-        return personneDto;
+        return acteurDto;
     }
 
     @Override
-    public List<PersonneDto> add(Map<String, Object> p) throws ParseException {
+    public List<ActeurDto> add(Map<String, Object> p) throws ParseException {
 
         List<Personne> personnes = (List) personneRepository.findAll();
         DateFormat dateFormat = new SimpleDateFormat();
@@ -63,13 +61,13 @@ public class PersonneServiceImpl implements PersonneService {
         personne.setNom((String) p.get("nom"));
         personne.setPrenom((String) p.get("prenom"));
         personne.setDateOfBirth(date);
-        List<PersonneDto> personneDtos = transformers.convertToListDto(personneRepository.save(personnes), PersonneDto.class);
-        personneDtos.forEach(personneDto ->{
-            if(personneDto.getDateOfBirth() != null) {
-                personneDto.setAge(PersonneHelper.getInstance().calculateAgeFromDateOfBirth(date));
+        List<ActeurDto> acteurDtos = transformers.convertToListDto(personneRepository.save(personnes), ActeurDto.class);
+        acteurDtos.forEach(acteurDto ->{
+            if(acteurDto.getDateOfBirth() != null) {
+                acteurDto.setAge(PersonneHelper.getInstance().calculateAgeFromDateOfBirth(date));
             }
         });
-        return personneDtos;
+        return acteurDtos;
     }
 
     @Override

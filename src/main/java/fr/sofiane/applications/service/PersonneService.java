@@ -1,6 +1,6 @@
 package fr.sofiane.applications.service;
 
-import fr.sofiane.applications.dto.PersonneDto;
+import fr.sofiane.applications.dto.ActeurDto;
 import fr.sofiane.applications.model.Personne;
 
 import java.text.ParseException;
@@ -12,11 +12,11 @@ import java.util.Map;
  */
 public interface PersonneService {
 
-    List<PersonneDto> getPersonnes();
+    List<ActeurDto> getPersonnes();
 
-    PersonneDto getOne(Long id);
+    ActeurDto getOne(Long id);
 
-    List<PersonneDto> add(Map<String, Object> personne) throws ParseException;
+    List<ActeurDto> add(Map<String, Object> personne) throws ParseException;
 
     void update(Long id, Map<String, Object> personne) throws ParseException;
 
