@@ -2,6 +2,7 @@ package fr.sofiane.applications.service.impl;
 
 import fr.sofiane.applications.dto.PersonneDto;
 import fr.sofiane.applications.helper.PersonneHelper;
+import fr.sofiane.applications.model.Acteur;
 import fr.sofiane.applications.model.Personne;
 import fr.sofiane.applications.repository.PersonneRepository;
 import fr.sofiane.applications.service.PersonneService;
@@ -53,12 +54,12 @@ public class PersonneServiceImpl implements PersonneService {
 
     @Override
     public List<PersonneDto> add(Map<String, Object> p) throws ParseException {
-        /*
+
         List<Personne> personnes = (List) personneRepository.findAll();
         DateFormat dateFormat = new SimpleDateFormat();
         Date date = dateFormat.parse((String) p.get("dateOfBirth"));
 
-        Personne personne = new Personne();
+        Personne personne = new Acteur();
         personne.setNom((String) p.get("nom"));
         personne.setPrenom((String) p.get("prenom"));
         personne.setDateOfBirth(date);
@@ -69,8 +70,6 @@ public class PersonneServiceImpl implements PersonneService {
             }
         });
         return personneDtos;
-        */
-        return null;
     }
 
     @Override

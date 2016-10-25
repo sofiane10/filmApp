@@ -14,9 +14,17 @@ import java.util.List;
  * Created by Sofiane on 21/10/2016.
  */
 
-@Entity(name = "personne")
-@Table(name = "personne")
-public abstract class Personne extends CommonEntity {
+@MappedSuperclass
+public abstract class Personne {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
+
+    @Version
+    @Column(name = "version" )
+    private Integer version= 0;
 
     @NotNull
     private String nom;
@@ -30,6 +38,7 @@ public abstract class Personne extends CommonEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type_personne")
+    @NotNull
     private TypePersonneEnum typePersonne;
 
     public String getNom() {
