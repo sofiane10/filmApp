@@ -1,8 +1,6 @@
 package fr.sofiane.applications.helper;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
+import java.time.*;
 import java.util.Date;
 
 /**
@@ -25,7 +23,8 @@ public class PersonneHelper {
 
     public Integer calculateAgeFromDateOfBirth(Date date){
         LocalDate today = LocalDate.now();
-        LocalDate dateOfBirth = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Instant instant = Instant.ofEpochMilli(date.getTime());
+        LocalDate dateOfBirth = LocalDateTime.ofInstant(instant,ZoneId.systemDefault()).toLocalDate();
         return Period.between(dateOfBirth,today).getYears();
     }
 

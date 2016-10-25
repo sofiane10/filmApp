@@ -15,7 +15,8 @@ import java.util.List;
  */
 
 @MappedSuperclass
-public abstract class Personne {
+public abstract class Personne implements Serializable {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,8 +24,8 @@ public abstract class Personne {
     private Long id;
 
     @Version
-    @Column(name = "version" )
-    private Integer version= 0;
+    @Column(name = "version")
+    private Integer version;
 
     @NotNull
     private String nom;
@@ -40,6 +41,22 @@ public abstract class Personne {
     @Column(name = "type_personne")
     @NotNull
     private TypePersonneEnum typePersonne;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
 
     public String getNom() {
         return nom;
