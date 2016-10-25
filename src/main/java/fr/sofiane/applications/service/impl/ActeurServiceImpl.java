@@ -35,8 +35,7 @@ public class ActeurServiceImpl implements ActeurService {
 
     @Override
     public List<ActeurDto> getActeurs() {
-        List<Acteur> acteurs = (List<Acteur>) (acteurRepository.findAll());
-        List<ActeurDto> acteurDtos = transformers.convertActeurToActeurDtoList(acteurs);
+        List<ActeurDto> acteurDtos = transformers.convertActeurToActeurDtoList((List<Acteur>)acteurRepository.findAll());
         acteurDtos.forEach(acteurDto -> {
             if (acteurDto.getDateOfBirth() != null) {
                 acteurDto.setAge(PersonneHelper.getInstance().calculateAgeFromDateOfBirth(acteurDto.getDateOfBirth()));
@@ -47,7 +46,7 @@ public class ActeurServiceImpl implements ActeurService {
 
     @Override
     public ActeurDto getActeur(Long id) {
-        ActeurDto acteurDto = (ActeurDto) transformers.convertToDto(acteurRepository.findOne(id), ActeurDto.class);
+        ActeurDto acteurDto = transformers.convertActeurToActeurDto(acteurRepository.findOne(id));
         if (acteurDto.getDateOfBirth() != null) {
             acteurDto.setAge(PersonneHelper.getInstance().calculateAgeFromDateOfBirth(acteurDto.getDateOfBirth()));
         }

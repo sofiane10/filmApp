@@ -49,18 +49,33 @@ public class Transformers {
             acteurDto.setNom(acteur.getNom());
             acteurDto.setPrenom(acteur.getPrenom());
             acteurDto.setDateOfBirth(acteur.getDateOfBirth());
-            List<FilmDto> filmDtos = new ArrayList<>();
-            acteur.getFilms().forEach(film -> {
-                FilmDto filmDto = new FilmDto();
-                filmDto.setId(film.getId());
-                filmDto.setTitre(film.getTitre());
-                filmDto.setDuree(film.getDuree());
-                filmDto.setDateDeSortie(film.getDateDeSortie());
-                filmDtos.add(filmDto);
-            });
-            acteurDto.setFilmDtos(filmDtos);
+            acteurDto.setFilmDtos(getFilmDtosFromActeur(acteur));
             acteurDtos.add(acteurDto);
         });
         return acteurDtos;
+    }
+
+    public ActeurDto convertActeurToActeurDto(Acteur acteur){
+        ActeurDto acteurDto = new ActeurDto();
+        acteurDto.setId(acteur.getId());
+        acteurDto.setNom(acteur.getNom());
+        acteurDto.setPrenom(acteur.getPrenom());
+        acteurDto.setDateOfBirth(acteur.getDateOfBirth());
+        acteurDto.setFilmDtos(getFilmDtosFromActeur(acteur));
+
+        return acteurDto;
+    }
+
+    public List<FilmDto> getFilmDtosFromActeur(Acteur acteur) {
+        List<FilmDto> filmDtos = new ArrayList<>();
+        acteur.getFilms().forEach(film -> {
+            FilmDto filmDto = new FilmDto();
+            filmDto.setId(film.getId());
+            filmDto.setTitre(film.getTitre());
+            filmDto.setDuree(film.getDuree());
+            filmDto.setDateDeSortie(film.getDateDeSortie());
+            filmDtos.add(filmDto);
+        });
+        return filmDtos;
     }
 }
