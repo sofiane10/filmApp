@@ -29,7 +29,7 @@ public class Film extends CommonEntity{
 
     @NotNull
     @Column(name = "acteur")
-    @OneToMany(fetch= FetchType.EAGER, cascade= CascadeType.ALL)
+    @OneToMany(fetch= FetchType.LAZY, cascade= CascadeType.ALL)
     private List<Acteur> acteurs;
 
     @NotNull

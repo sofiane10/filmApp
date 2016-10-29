@@ -2,7 +2,9 @@ package fr.sofiane.applications.transformer;
 
 import fr.sofiane.applications.dto.ActeurDto;
 import fr.sofiane.applications.dto.FilmDto;
+import fr.sofiane.applications.dto.RealisateurDto;
 import fr.sofiane.applications.model.Acteur;
+import fr.sofiane.applications.model.Realisateur;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -41,7 +43,7 @@ public class Transformers {
         return list;
     }
 
-    public List<ActeurDto> convertActeurToActeurDtoList(List<Acteur> acteurs){
+    public List<ActeurDto> convertActeursToActeurDtoList(List<Acteur> acteurs) {
         List<ActeurDto> acteurDtos = new ArrayList<>();
         acteurs.forEach(acteur -> {
             ActeurDto acteurDto = new ActeurDto();
@@ -55,7 +57,7 @@ public class Transformers {
         return acteurDtos;
     }
 
-    public ActeurDto convertActeurToActeurDto(Acteur acteur){
+    public ActeurDto convertActeurToActeurDto(Acteur acteur) {
         ActeurDto acteurDto = new ActeurDto();
         acteurDto.setId(acteur.getId());
         acteurDto.setNom(acteur.getNom());
@@ -68,14 +70,60 @@ public class Transformers {
 
     public List<FilmDto> getFilmDtosFromActeur(Acteur acteur) {
         List<FilmDto> filmDtos = new ArrayList<>();
-        acteur.getFilms().forEach(film -> {
-            FilmDto filmDto = new FilmDto();
-            filmDto.setId(film.getId());
-            filmDto.setTitre(film.getTitre());
-            filmDto.setDuree(film.getDuree());
-            filmDto.setDateDeSortie(film.getDateDeSortie());
-            filmDtos.add(filmDto);
-        });
+        if (acteur.getFilms() != null) {
+            acteur.getFilms().forEach(film -> {
+                FilmDto filmDto = new FilmDto();
+                filmDto.setId(film.getId());
+                filmDto.setTitre(film.getTitre());
+                filmDto.setDuree(film.getDuree());
+                filmDto.setDateDeSortie(film.getDateDeSortie());
+                filmDtos.add(filmDto);
+            });
+        }
         return filmDtos;
     }
+
+
+    public List<RealisateurDto> convertRealisateursToRealisateurDtoList(List<Realisateur> realisateurs) {
+        List<RealisateurDto> realisateurDtos = new ArrayList<>();
+        realisateurs.forEach(realisateur -> {
+            RealisateurDto realisateurDto = new RealisateurDto();
+            realisateurDto.setId(realisateur.getId());
+            realisateurDto.setNom(realisateur.getNom());
+            realisateurDto.setPrenom(realisateur.getPrenom());
+            realisateurDto.setDateOfBirth(realisateur.getDateOfBirth());
+            realisateurDto.setFilmDtos(getFilmDtosFromRealisateur(realisateur));
+            realisateurDtos.add(realisateurDto);
+        });
+        return realisateurDtos;
+    }
+
+
+    public RealisateurDto convertRealisateurToRealisateurDto(Realisateur realisateur) {
+        RealisateurDto realisateurDto = new RealisateurDto();
+        realisateurDto.setId(realisateur.getId());
+        realisateurDto.setNom(realisateur.getNom());
+        realisateurDto.setPrenom(realisateur.getPrenom());
+        realisateurDto.setDateOfBirth(realisateur.getDateOfBirth());
+        realisateurDto.setFilmDtos(getFilmDtosFromRealisateur(realisateur));
+
+        return realisateurDto;
+    }
+
+    public List<FilmDto> getFilmDtosFromRealisateur(Realisateur realisateur) {
+        List<FilmDto> filmDtos = new ArrayList<>();
+
+        if (realisateur.getFilms() != null) {
+            realisateur.getFilms().forEach(film -> {
+                FilmDto filmDto = new FilmDto();
+                filmDto.setId(film.getId());
+                filmDto.setTitre(film.getTitre());
+                filmDto.setDuree(film.getDuree());
+                filmDto.setDateDeSortie(film.getDateDeSortie());
+                filmDtos.add(filmDto);
+            });
+        }
+        return filmDtos;
+    }
+
 }
