@@ -14,6 +14,7 @@ public class FilmDto {
     private String titre;
     private Double duree;
     private Date dateDeSortie;
+    private Integer anneeDeProduction;
 
     private List<ActeurDto> acteurDtos;
     private List<RealisateurDto> realisateurDtos;
@@ -49,6 +50,14 @@ public class FilmDto {
 
     public void setDateDeSortie(Date dateDeSortie) {
         this.dateDeSortie = dateDeSortie;
+    }
+
+    public Integer getAnneeDeProduction() {
+        return anneeDeProduction;
+    }
+
+    public void setAnneeDeProduction(Integer anneeDeProduction) {
+        this.anneeDeProduction = anneeDeProduction;
     }
 
     public List<ActeurDto> getActeurDtos() {

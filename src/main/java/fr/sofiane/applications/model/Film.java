@@ -27,6 +27,10 @@ public class Film extends CommonEntity{
     @Column(name = "date_de_sortie")
     private Date dateDeSortie;
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "annee_de_production")
+    private Date anneeDeProduction;
+
     @NotNull
     @Column(name = "acteur")
     @OneToMany(fetch= FetchType.LAZY, cascade= CascadeType.ALL)
@@ -64,6 +68,14 @@ public class Film extends CommonEntity{
 
     public void setDateDeSortie(Date dateDeSortie) {
         this.dateDeSortie = dateDeSortie;
+    }
+
+    public Date getAnneeDeProduction() {
+        return anneeDeProduction;
+    }
+
+    public void setAnneeDeProduction(Date anneeDeProduction) {
+        this.anneeDeProduction = anneeDeProduction;
     }
 
     public List<Acteur> getActeurs() {

@@ -28,4 +28,9 @@ public class PersonneHelper {
         return Period.between(dateOfBirth,today).getYears();
     }
 
+    public LocalDate dateToLocalDate(Date date){
+        Instant instant = Instant.ofEpochMilli(date.getTime());
+        return LocalDateTime.ofInstant(instant,ZoneId.systemDefault()).toLocalDate();
+    }
+
 }
