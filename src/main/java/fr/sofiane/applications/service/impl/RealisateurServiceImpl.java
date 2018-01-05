@@ -58,7 +58,6 @@ public class RealisateurServiceImpl implements RealisateurService {
         realisateur.setNom((String) r.get("nom"));
         realisateur.setPrenom((String) r.get("prenom"));
         realisateur.setDateOfBirth(date);
-        realisateur.setTypePersonne(REALISATEUR);
         //acteur.setFilms((List<Film>)a.get("films"));
         RealisateurDto realisateurDto = transformers.convertRealisateurToRealisateurDto(realisateurRepository.save(realisateur));
         realisateurDto.setDateOfBirth(date);

@@ -5,8 +5,8 @@ import fr.sofiane.applications.enums.TypePersonneEnum;
 import fr.sofiane.applications.helper.PersonneHelper;
 import fr.sofiane.applications.model.Acteur;
 import fr.sofiane.applications.model.Film;
-import fr.sofiane.applications.model.Personne;
 import fr.sofiane.applications.repository.ActeurRepository;
+import fr.sofiane.applications.repository.FilmRepository;
 import fr.sofiane.applications.service.ActeurService;
 import fr.sofiane.applications.transformer.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import static fr.sofiane.applications.enums.TypePersonneEnum.ACTEUR;
-
 /**
  * Created by Sofiane on 21/10/2016.
  */
@@ -30,6 +28,9 @@ public class ActeurServiceImpl implements ActeurService {
 
     @Autowired
     ActeurRepository acteurRepository;
+    
+    @Autowired
+    FilmRepository filmRepository;
 
     @Autowired
     Transformers transformers;
@@ -42,16 +43,17 @@ public class ActeurServiceImpl implements ActeurService {
     }
 
     @Override
-    public ActeurDto getActeur(Long id) {
+    public ActeurDto getActeur(Long id) throws Exception {
         ActeurDto acteurDto = transformers.convertActeurToActeurDto(acteurRepository.findOne(id));
         if (acteurDto.getDateOfBirth() != null) {
             acteurDto.setAge(PersonneHelper.getInstance().calculateAgeFromDateOfBirth(acteurDto.getDateOfBirth()));
         }
+        acteurDto.setFilmDtos(transformers.convertFilmToFilmByActeurDto(filmRepository.findFilmsByActeurId(acteurDto.getId())));
         return acteurDto;
     }
 
     @Override
-    public List<ActeurDto> addActeur(Map<String, Object> a) throws ParseException {
+    public List<ActeurDto> addActeur(Map<String, Object> a) throws Exception {
 
         List<ActeurDto> acteurs = getActeurs();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -61,7 +63,6 @@ public class ActeurServiceImpl implements ActeurService {
         acteur.setNom((String) a.get("nom"));
         acteur.setPrenom((String) a.get("prenom"));
         acteur.setDateOfBirth(date);
-        acteur.setTypePersonne(ACTEUR);
         //acteur.setFilms((List<Film>)a.get("films"));
         ActeurDto acteurDto = transformers.convertActeurToActeurDto(acteurRepository.save(acteur));
         acteurDto.setDateOfBirth(date);

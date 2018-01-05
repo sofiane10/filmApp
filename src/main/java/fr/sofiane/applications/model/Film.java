@@ -1,7 +1,5 @@
 package fr.sofiane.applications.model;
 
-import fr.sofiane.applications.enums.CategorieFilmEnum;
-
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -14,7 +12,16 @@ import java.util.List;
 
 @Entity(name = "film")
 @Table(name = "film")
-public class Film extends CommonEntity{
+public class Film{
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
+
+    @Version
+    @Column(name = "version")
+    private Integer version;
 
     @NotNull
     private String titre;
@@ -31,22 +38,38 @@ public class Film extends CommonEntity{
     @Column(name = "annee_de_production")
     private Date anneeDeProduction;
 
-    @NotNull
+    @NotNull 
     @Column(name = "acteur")
-    @OneToMany(fetch= FetchType.LAZY, cascade= CascadeType.ALL)
+    @ManyToMany(fetch= FetchType.LAZY, cascade= CascadeType.ALL)
     private List<Acteur> acteurs;
 
     @NotNull
     @Column(name = "realisateur")
-    @OneToMany(fetch= FetchType.LAZY, cascade= CascadeType.ALL)
+    @ManyToMany(fetch= FetchType.LAZY, cascade= CascadeType.ALL)
     private List<Realisateur> realisateurs;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "categorie_film")
-    @OneToMany(fetch= FetchType.LAZY, cascade= CascadeType.ALL)
+    @ManyToMany(fetch= FetchType.LAZY, cascade= CascadeType.ALL)
     private List<CategorieFilm> categorieFilms;
 
-    public String getTitre() {
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+
+	public String getTitre() {
         return titre;
     }
 

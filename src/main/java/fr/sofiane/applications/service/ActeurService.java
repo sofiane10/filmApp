@@ -14,9 +14,9 @@ public interface ActeurService {
 
     List<ActeurDto> getActeurs();
 
-    ActeurDto getActeur(Long id);
+    ActeurDto getActeur(Long id) throws Exception;
 
-    List<ActeurDto> addActeur(Map<String, Object> acteur) throws ParseException;
+    List<ActeurDto> addActeur(Map<String, Object> acteur) throws ParseException, Exception;
 
     void updateActeur(Long id, Map<String, Object> acteur) throws ParseException;
 

@@ -25,12 +25,12 @@ public class ActeurController {
     }
 
     @RequestMapping(value = "/{idActeur}" ,method = RequestMethod.GET)
-    public ActeurDto getActeur(@PathVariable("idActeur") Long id) {
+    public ActeurDto getActeur(@PathVariable("idActeur") Long id) throws Exception {
         return acteurService.getActeur(id);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.PUT)
-    public List<ActeurDto> addActeur(@RequestBody Map<String, Object> acteur) throws java.text.ParseException {
+    public List<ActeurDto> addActeur(@RequestBody Map<String, Object> acteur) throws Exception {
         return acteurService.addActeur(acteur);
     }
 

@@ -13,7 +13,7 @@ public class ActeurDto {
     private String prenom;
     private Integer age;
     private Date dateOfBirth;
-    private List<FilmDto> filmDtos;
+    private List<FilmByActeurDto> filmDtos;
 
 
     public Long getId() {
@@ -56,11 +56,12 @@ public class ActeurDto {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public List<FilmDto> getFilmDtos() {
-        return filmDtos;
-    }
+	public List<FilmByActeurDto> getFilmDtos() {
+		return filmDtos;
+	}
 
-    public void setFilmDtos(List<FilmDto> filmDtos) {
-        this.filmDtos = filmDtos;
-    }
+	public void setFilmDtos(List<FilmByActeurDto> filmDtos) {
+		this.filmDtos = filmDtos;
+	}
+
 }
